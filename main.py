@@ -14,6 +14,7 @@ def makeList():
         list.append(randint(0,100))
         listString=listString+str(list[i])+" "
     label.config(text=listString)
+    print(list)
 
 
 #Aktualizuje liste po wywolaniu funkcji sortowania
