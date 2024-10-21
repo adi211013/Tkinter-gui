@@ -4,6 +4,7 @@ from tkinter import ttk
 
 listString=""
 
+#Tworzy liste, o dlugosci podanej przez uzytkownika i wyswietla ja w GUI
 def makeList():
     listString = ""
     global list
@@ -15,7 +16,7 @@ def makeList():
     label.config(text=listString)
 
 
-
+#Aktualizuje liste po wywolaniu funkcji sortowania
 def updateList():
     global list
     listString = ""
@@ -23,6 +24,7 @@ def updateList():
     for i in list:
         listString = listString + str(i) + " "
     label.config(text=listString)
+#Sortowanie babelkowe
 def bubbleSort():
     global list
     n = len(list)
@@ -31,6 +33,7 @@ def bubbleSort():
             if list[j] > list[j+1]:
                 list[j],list[j+1]=list[j+1],list[j]
     updateList()
+#Sortowanie przez wybor
 def selectionSort():
     global list
     n = len(list)
@@ -42,7 +45,7 @@ def selectionSort():
 
         list[i], list[min_idx] = list[min_idx], list[i]
     updateList()
-
+#Sortowanie przez wstawianie
 def insertionSort():
     global list
     for i in range(1, len(list)):
@@ -55,11 +58,12 @@ def insertionSort():
     updateList()
 
 
-
+#Tworzenie GUI
 root=Tk()
 root.title("Sortowanie")
 root.geometry('800x600')
 root.grid()
+#Wstawianie kontrolek
 numberEntry=ttk.Entry(root)
 numberEntry.grid(column=0, row=0)
 button=ttk.Button(root,text="Wylosuj",command=makeList)
