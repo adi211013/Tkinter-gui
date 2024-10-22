@@ -64,6 +64,13 @@ root=Tk()
 root.title("Sortowanie")
 root.geometry('800x600')
 root.grid()
+#Styl
+root.configure(bg="#2e2e2e")
+style=ttk.Style()
+style.theme_use('clam')
+style.configure('TButton', background='#2e2e2e', foreground='white',font=('Helvetica', 12, 'bold'))
+style.configure('TLabel',background='#2e2e2e',font=('Helvetica', 16))
+style.configure('TEntry',background='#2e2e2e',font=('Helvetica', 16))
 #Wstawianie kontrolek
 numberEntry=ttk.Entry(root)
 numberEntry.grid(column=0, row=0)
