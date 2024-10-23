@@ -1,9 +1,22 @@
+from curses.ascii import isdigit
 from random import random, randint
 from tkinter import *
 from tkinter import ttk
 
 listString=""
-
+global a,b
+a=0
+b=100
+def rangeSelector():
+    global a,b
+    tempA=int(aEntry.get())
+    tempB=int(bEntry.get())
+    if tempA>tempB:
+        a=tempA
+        b=tempB
+    else:
+        b=tempB
+        a=tempA
 #Tworzy liste, o dlugosci podanej przez uzytkownika i wyswietla ja w GUI
 def makeList():
     listString = ""
@@ -11,7 +24,8 @@ def makeList():
     list=[]
     z=int(numberEntry.get())
     for i in range(0,z):
-        list.append(randint(0,100))
+        #print(a,b)
+        list.append(randint(a,b))
         listString=listString+str(list[i])+" "
     label.config(text=listString)
     print(list)
@@ -73,18 +87,24 @@ style.configure('TLabel',background='#564c4d',font=('Helvetica', 16))
 style.configure('TEntry',background='#564c4d',font=('Helvetica', 16))
 #Wstawianie kontrolek
 numberEntry=ttk.Entry(root)
-numberEntry.grid(column=0, row=0)
+aEntry=ttk.Entry(root)
+bEntry=ttk.Entry(root)
+rangebutton=ttk.Button(root,text="Wybierz zakres",command=rangeSelector)
+aEntry.grid(row=0, column=0, padx=5, pady=5)
+bEntry.grid(row=0, column=1,padx=5, pady=5)
+rangebutton.grid(column=2, row=0)
+numberEntry.grid(column=0, row=1)
 button=ttk.Button(root,text="Wylosuj",command=makeList)
-button.grid(column=1, row=0)
+button.grid(column=1, row=1)
 label=ttk.Label(root,text="")
-label.grid(column=0, row=1,columnspan=12,pady=10,sticky='ew')
+label.grid(column=0, row=2,columnspan=12,pady=10,sticky='ew')
 bubbleSortButton=ttk.Button(root,text="Bubble sort",command=bubbleSort)
 selectionSortButton=ttk.Button(root,text="Selection sort",command=selectionSort)
 insertionSortButton=ttk.Button(root,text="Insertion sort",command=insertionSort)
-bubbleSortButton.grid(column=0, row=2,sticky="ew")
-selectionSortButton.grid(column=1, row=2,sticky="ew")
-insertionSortButton.grid(column=2, row=2,sticky="ew")
+bubbleSortButton.grid(column=0, row=4,sticky="ew")
+selectionSortButton.grid(column=1, row=4,sticky="ew")
+insertionSortButton.grid(column=2, row=4,sticky="ew")
 exitButton=ttk.Button(root,text="Wylacz",command=root.quit)
-exitButton.grid(column=0, row=3,columnspan=12,pady=10)
+exitButton.grid(column=0, row=5,columnspan=12,pady=10)
 
 root.mainloop()
