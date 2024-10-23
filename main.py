@@ -1,4 +1,5 @@
 from curses.ascii import isdigit
+from itertools import count
 from random import random, randint
 from tkinter import *
 from tkinter import ttk
@@ -29,6 +30,8 @@ def makeList():
         listString=listString+str(list[i])+" "
     label.config(text=listString)
     print(list)
+    avg()
+    medianlabel.config(text="")
 
 
 #Aktualizuje liste po wywolaniu funkcji sortowania
@@ -48,6 +51,7 @@ def bubbleSort():
             if list[j] > list[j+1]:
                 list[j],list[j+1]=list[j+1],list[j]
     updateList()
+    median()
 #Sortowanie przez wybor
 def selectionSort():
     global list
@@ -60,6 +64,7 @@ def selectionSort():
 
         list[i], list[min_idx] = list[min_idx], list[i]
     updateList()
+    median()
 #Sortowanie przez wstawianie
 def insertionSort():
     global list
@@ -71,7 +76,22 @@ def insertionSort():
             j -= 1
         list[j + 1] = key
     updateList()
-
+    median()
+def avg():
+    global list
+    avg=sum(list)/len(list)
+    avg=round(avg,2)
+    avgLabel.config(text="Srednia: "+str(avg))
+def median():
+    global list
+    size=len(list)
+    median=0
+    if size%2!=0:
+        median=list[size/2]
+    else:
+        print(size)
+    medianlabel.config(text="Mediana: "+str(median))
+    #TODO: Median
 
 #Tworzenie GUI
 root=Tk()
@@ -84,7 +104,7 @@ style=ttk.Style()
 style.theme_use('clam')
 style.configure('TButton', background='#564c4d', foreground='white',font=('Helvetica', 12, 'bold'))
 style.configure('TLabel',background='#564c4d',font=('Helvetica', 16))
-style.configure('TEntry',background='#564c4d',font=('Helvetica', 16))
+style.configure('TEntry',background='#564c4d',font=('Helvetica', 22))
 #Wstawianie kontrolek
 numberEntry=ttk.Entry(root)
 aEntry=ttk.Entry(root)
@@ -96,15 +116,19 @@ rangebutton.grid(column=2, row=0)
 numberEntry.grid(column=0, row=1)
 button=ttk.Button(root,text="Wylosuj",command=makeList)
 button.grid(column=1, row=1)
+avgLabel=ttk.Label(root,text="")
+medianlabel=ttk.Label(root,text="")
+avgLabel.grid(column=0, row=3)
+medianlabel.grid(column=1, row=3)
 label=ttk.Label(root,text="")
 label.grid(column=0, row=2,columnspan=12,pady=10,sticky='ew')
 bubbleSortButton=ttk.Button(root,text="Bubble sort",command=bubbleSort)
 selectionSortButton=ttk.Button(root,text="Selection sort",command=selectionSort)
 insertionSortButton=ttk.Button(root,text="Insertion sort",command=insertionSort)
-bubbleSortButton.grid(column=0, row=4,sticky="ew")
-selectionSortButton.grid(column=1, row=4,sticky="ew")
-insertionSortButton.grid(column=2, row=4,sticky="ew")
+bubbleSortButton.grid(column=0, row=5,sticky="ew")
+selectionSortButton.grid(column=1, row=5,sticky="ew")
+insertionSortButton.grid(column=2, row=5,sticky="ew")
 exitButton=ttk.Button(root,text="Wylacz",command=root.quit)
-exitButton.grid(column=0, row=5,columnspan=12,pady=10)
+exitButton.grid(column=0, row=6,columnspan=12,pady=10)
 
 root.mainloop()
