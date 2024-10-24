@@ -87,11 +87,13 @@ def median():
     size=len(list)
     median=0
     if size%2!=0:
-        median=list[size/2]
+        size=round(size/2)
+        median=list[size]
     else:
-        print(size)
+        size=size/2
+        size=int(size)
+        median=(list[size-1]+list[size-2])/2.0
     medianlabel.config(text="Mediana: "+str(median))
-    #TODO: Median
 
 #Tworzenie GUI
 root=Tk()
