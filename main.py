@@ -48,7 +48,8 @@ class NumberList:
         print(list)
         self.avg()
         medianlabel.config(text="")
-    #Aktualizuje liste po wywolaniu funkcji sortowania
+#randomowy komentarz
+#Aktualizuje liste po wywolaniu funkcji sortowania
     def updateList(self):
         global list
         listString = ""
